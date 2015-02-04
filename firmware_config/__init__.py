@@ -10,6 +10,7 @@ class FirmwareConfig(object):
 
 import firmware_config.cisco as cisco
 import firmware_config.dell as dell
+import firmware_config.ibm as ibm
 
 
 def create(vendor, host, user, password):
@@ -17,5 +18,7 @@ def create(vendor, host, user, password):
         return cisco.CiscoFirmwareConfig(host, user, password)
     elif vendor == "dell":
         return dell.DellFirmwareConfig(host, user, password)
+    elif vendor == "ibm":
+        return ibm.IBMFirmwareConfig(host, user, password)
 
     return None

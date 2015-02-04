@@ -2,7 +2,9 @@ firmware_config
 
 This module provides a broadly vendor-neutral interface for out of band
 firmware configuration. It currently allows the retrieval and setting of
-firmware values on Dell and Cisco hardware.
+firmware values on Dell, Cisco and IBM hardware. IBM support requires
+python-eficompressor, available at
+http://www.github.com/nebula/python-eficompressor
 
 The interface is as follows:
 
@@ -27,16 +29,17 @@ firmware_config.get_fw_options()
 firmware_config.set_fw_options(options)
     set firmware configuration values to those contained in options.
 
-    options: a dict of dicts as described in get_fw_options().
-             get_fw_options() must always be called before set_fw_options,
-	     and the modified options passed back.
+    options: a dict of dicts as described in get_fw_options(). get_fw_options()
+             must always be called before set_fw_options, and the modified
+	     options passed back.
 
 firmware_config.reboot()
     returns a boolean indicating whether or not the system must be rebooted
     in order to apply the pending changes
 
-firmware_config.reboot_system()
+firmware_config.reboot_system(options)
     performs a reboot of the system. This should be used in preference to any
     other form of reboot, as it may set flags to inform the firmware to
-    perform the updates
+    perform the updates. The set of configured options must be passed in order
+    to allow the system to determine which calls must be made. 
 
